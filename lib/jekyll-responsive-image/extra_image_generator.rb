@@ -11,11 +11,12 @@ module Jekyll
         config['extra_images'].each do |pathspec|
           Dir.glob(site.in_source_dir(pathspec)) do |image_path|
             if FileTest.file?(image_path)
-              path = Pathname.new(image_path)
-              relative_image_path = path.relative_path_from(site_source)
+              if image_path != "null"
+                path = Pathname.new(image_path)
+                relative_image_path = path.relative_path_from(site_source)
 
-              result = ImageProcessor.process(relative_image_path, config)
-              result[:resized].each { |image| keep_resized_image!(site, image) }
+                result = ImageProcessor.process(relative_image_path, config)
+                result[:resized].each { |image| keep_resized_image!(site, image) }
             end
           end
         end
