@@ -17,6 +17,7 @@ module Jekyll
 
                 result = ImageProcessor.process(relative_image_path, config)
                 result[:resized].each { |image| keep_resized_image!(site, image) }
+              end
             end
           end
         end
